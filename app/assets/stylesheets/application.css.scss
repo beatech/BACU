@@ -22,12 +22,36 @@ body {
   padding: 10px 30px;
   width: 200px;
   float: left;
-  border-right: 1px solid #888;
+  border-right: 1px solid #555;
 }
 
 .right_column {
   padding: 20px 30px;
   width: 600px;
   float: left;
-  border-left: 1px solid #888;
+  border-left: 1px solid #555;
+}
+
+.footer {
+  margin-top: 4px;
+  padding: 8px;
+  color: #fff;
+  text-align: center;
+  background-color: #222;
+}
+
+.registration {
+  .section {
+    vertical-align: middle;
+    margin-top: 20px;
+  }
+
+  input[type="radio"] {
+    margin: 0 0 4px 0;
+  }
+
+  label {
+    margin: 0;
+    display: inline-block;
+  }
 }

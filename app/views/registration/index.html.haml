@@ -1,0 +1,14 @@
+.registration
+  %h2 エントリー
+  %p #{@twitter_account.screen_name}さん、ログインありがとうございます。
+  %p まずこのアカウントの種類をお選びください。
+
+  = form_tag(registration_path) do
+    .section
+      = radio_button_tag :account, 'member', checked: 'checked'
+      = label :account, 'member', 'サークルメンバー'
+    .section
+      = radio_button_tag :account, 'circle'
+      = label :account, 'circle', 'サークル公式アカウント'
+    .section
+      = submit_tag '決定', class: 'btn'
