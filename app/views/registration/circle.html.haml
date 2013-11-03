@@ -1,3 +1,22 @@
-%h3 サークルアカウントとして登録
-%p まだサークルエントリーは完了していません。
-%p あなたのサークルホームページのアドレスを入力してください。
+= link_to "戻る", registration_path
+.registration
+  %h3 サークルアカウントとして登録
+  %p まだサークルエントリーは完了していません。
+  %p あなたのサークルの情報を入力してください。
+
+  .registration_form
+    = form_for @circle do |f|
+      .section
+        = f.hidden_field :twitter_account_id
+        Twitterアカウント: @#{@twitter_account.screen_name}
+      .section
+        サークル名:
+        = f.text_field :name
+      .section
+        大学名:
+        = f.text_field :university
+      .section
+        ホームページURL:
+        = f.text_field :url
+      .section
+        = f.submit 'サークルエントリーする', class: 'btn btn-primary'

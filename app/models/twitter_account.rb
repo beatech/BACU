@@ -1,6 +1,6 @@
 class TwitterAccount < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :circle
+  has_one :user
+  has_one :circle
 
   validates :uid, presence: true
   validates :screen_name, presence: true

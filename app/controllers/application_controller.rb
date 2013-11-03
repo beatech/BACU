@@ -10,7 +10,14 @@ class ApplicationController < ActionController::Base
   end
 
   def require_registration
-    return if controller_name == 'registration'
+    return if registration_action?
     redirect_to registration_path if @twitter_account && @twitter_account.registered? == false
+  end
+
+  def registration_action?
+    return true if controller_name == 'registration'
+    return true if controller_name == 'circles' && action_name == 'create'
+    return true if controller_name == 'users' && action_name == 'create'
+    false
   end
 end
