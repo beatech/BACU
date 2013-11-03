@@ -1,0 +1,18 @@
+%header
+  .navbar.navbar-inverse.navbar-fixed-top
+    .navbar-inner
+      .container
+        = link_to 'BACU', root_url, class: 'brand'
+        %ul.nav
+          %li.active= link_to 'ホーム', root_url
+          %li= link_to 'ページ一覧', entries_path
+        %ul.nav.pull-right
+          - if true
+            %li= link_to 'Twitterでログイン', '#'
+          - else
+            %li.dropdown
+              = link_to '#', class: 'dropdown-toggle', :'data-toggle' => 'dropdown' do
+                Twitterでログイン
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to 'hoge', '#'

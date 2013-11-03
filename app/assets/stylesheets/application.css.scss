@@ -1,0 +1,33 @@
+@import "bootstrap";
+
+body {
+  margin-top: 50px;
+  background-color: #555;
+}
+
+.hero-unit {
+  color: #fff;
+  background-color: #222;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.contents_wrapper {
+  background-color: #fff;
+}
+
+.left_column {
+  margin-right: -1px;
+  padding: 10px 30px;
+  width: 200px;
+  float: left;
+  border-right: 1px solid #888;
+}
+
+.right_column {
+  padding: 20px 30px;
+  width: 600px;
+  float: left;
+  border-left: 1px solid #888;
+}

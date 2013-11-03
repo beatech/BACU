@@ -1,0 +1,9 @@
+= form_for(@entry) do |f|
+  .field
+    = f.label 'ページ名'
+    = f.text_field :title
+  .field
+    = f.label '本文'
+    = f.text_area :content, class: 'span8', rows: '16', maxlength: '30000'
+  .actions
+    = f.submit 'ページの更新', class: 'btn'
