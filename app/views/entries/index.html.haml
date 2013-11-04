@@ -1,7 +1,8 @@
 .entries
   %h3
     ページ一覧
-    = link_to 'ページを新規作成する', new_entry_path, class: 'btn btn-primary'
+    - if @twitter_account && @twitter_account.admin?
+      = link_to 'ページを新規作成する', new_entry_path, class: 'btn btn-primary'
   %p 計 #{Entry.all.count} ページ
   %ul
     - Entry.all.each do |entry|
