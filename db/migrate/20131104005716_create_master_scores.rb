@@ -3,8 +3,8 @@ class CreateMasterScores < ActiveRecord::Migration
     create_table :master_scores do |t|
       t.integer :master_user_id
       t.integer :master_music_id
-      t.float :basic_score
-      t.float :score
+      t.decimal :basic_score, precision: 10, scale: 8
+      t.decimal :score, precision: 10, scale: 8
 
       t.timestamps
     end

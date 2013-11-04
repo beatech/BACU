@@ -21,5 +21,5 @@
               - score = Master::Score.where(master_user_id: @user.id, master_music_id: music.id).first
               - unless score.present?
                 - score = Master::Score.create(master_user_id: @user.id, master_music_id: music.id, basic_score: 0, score: 0)
-              = number_field_tag "music[#{music.id}]", score.basic_score
+              = number_field_tag "music[#{music.id}]", score.basic_score, step: 0.01
   = submit_tag 'スコアを更新する', class: 'btn btn-primary'

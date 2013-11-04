@@ -84,19 +84,22 @@ circle_accounts.each do |circle_account|
 end
 
 games = [
-  {title: '弐寺', mt1: 'Inferno [SPA]', md1: '☆9', mt2: 'quasar[SPA]', md2: '☆11'},
-  {title: 'pop\'n', mt1: '秋（autumn G）[H]', md1: 'Lv31', mt2: 'わんわんコア（ポチコの幸せな日常）[EX]', md2: 'Lv45'},
-  {title: '指', mt1: 'LANA - キロクノカケラ (sasakure.UK Framework Remix) -[EXT]', md1: 'Lv8', mt2: '11/4 12:00よりいまだけ楽曲で遊べる新曲[EXT]', md2: 'Lv10'},
-  {title: 'REFLEC', mt1: 'つばめ[H]', md1: 'Lv8', mt2: 'Windy Fairy[H]', md2: 'Lv10'},
-  {title: 'DDR', mt1: 'Condor[DIF]', md1: '足9', mt2: 'Another Phase[EXP]', md2: '足15'},
-  {title: 'GF', mt1: 'しっぽのロック[EXP-B]', md1: '5.25', mt2: 'Jasper[EXT-G]', md2: '7.55'},
-  {title: 'DM', mt1: 'Chronos[ADV]', md1: '5.25', mt2: '三毛猫ロックンロール[EXT]', md2: '8.00'},
-  {title: 'SDVX', mt1: 'candii[EXH]', md1: 'Lv11', mt2: 'GEROL[EXH]', md2: 'Lv14'},
-  {title: 'ダンエボ', mt1: 'なめこのうた[MASTER]', md1: 'Lv1', mt2: 'サイバーサンダーサイダー[MASTER]', md2: 'Lv3'},
+  {title: '弐寺', mt1: 'Inferno [SPA]', md1: '☆9', mt2: 'quasar[SPA]', md2: '☆11', gt1: 'SHADE [SPA]', gd1: '☆11', gt2: 'SABER WING [SPA]', gd2: '☆11', gt3: 'blame [SPA]', gd3: '☆11'},
+  {title: 'pop\'n', mt1: '秋（autumn G）[H]', md1: 'Lv31', mt2: 'わんわんコア（ポチコの幸せな日常）[EX]', md2: 'Lv45', gt1: 'ハイスピード幻想チューン/SHION', gd1: 'Lv45', gt2: 'メカニカルジャズ/Apple Butter', gd2: 'Lv45', gt3: 'ポップミュージック/うた', gd3: 'Lv47'},
+  {title: '指', mt1: 'LANA - キロクノカケラ (sasakure.UK Framework Remix) -[EXT]', md1: 'Lv8', mt2: 'Stand Alone Beat Masta [EXT]', md2: 'Lv10', gt1: 'We\'re so Happy[EXT]', gd1: 'Lv10', gt2: '†渚の小悪魔ラヴリィ～レイディオ†[EXT]', gd2: 'Lv10', gt3: 'Our Faith[EXT]', gd3: 'Lv10'},
+  {title: 'REFLEC', mt1: 'つばめ[H]', md1: 'Lv8', mt2: 'Windy Fairy[H]', md2: 'Lv10', gt1: '7 Colors', gd1: 'Lv9', gt2: 'exmination leave', gd2: 'Lv10', gt3: 'Playing With Fire', gd3: 'Lv10+'},
+  {title: 'DDR', mt1: 'Condor[DIF]', md1: '足9', mt2: 'Another Phase[EXP]', md2: '足15', gt1: 'CHAOS(鬼)', gd1: '足16', gt2: 'GAIA(激)', gd2: '足16', gt3: 'tokyoEVOLVED (TYPE1)（激）', gd3: '足16'},
+  {title: 'GF', mt1: 'しっぽのロック[EXP-B]', md1: '5.25', mt2: 'Jasper[EXT-G]', md2: '7.55', gt1: 'Mighty Wind', gd1: '7.60', gt2: 'キケンな果実', gd2: '7.70', gt3: '虹色の花', gd3: '7.70'},
+  {title: 'DM', mt1: 'Chronos[ADV]', md1: '5.25', mt2: '三毛猫ロックンロール[EXT]', md2: '8.00', gt1: 'TRICK[EXP]', gd1: '7.00', gt2: 'solitude[EXP]', gd2: '7.75', gt3: '8 -eight- [EXP]', gd3: '8.10'},
+  {title: 'SDVX', mt1: 'candii[EXH]', md1: 'Lv11', mt2: 'GEROL[EXH]', md2: 'Lv14', gt1: 'BUBBLE RAVER[EXH]', gd1: 'Lv14', gt2: '- dirty rouge - [EXH]', gd2: 'Lv14', gt3: 'Venona[EXH]', gd3: 'Lv14'},
+  {title: 'ダンエボ', mt1: 'なめこのうた[MASTER]', md1: 'Lv1', mt2: 'サイバーサンダーサイダー[MASTER]', md2: 'Lv3', gt1: 'Do the Evolution', gd1: '?', gt2: '行くぜっ！怪盗少女 -Zver.-', gd2: '?', gt3: 'CAN\'T STOP FALLIN\' IN LOVE -super euro version-', gd3: '?'},
 ]
 
 games.each do |game|
   g = Game.create(title: game[:title])
   Master::Music.create(title: game[:mt1], difficulty: game[:md1], game_id: g.id)
   Master::Music.create(title: game[:mt2], difficulty: game[:md2], game_id: g.id)
+  Game::Music.create(title: game[:gt1], difficulty: game[:gd1], game_id: g.id)
+  Game::Music.create(title: game[:gt2], difficulty: game[:gd2], game_id: g.id)
+  Game::Music.create(title: game[:gt3], difficulty: game[:gd3], game_id: g.id)
 end

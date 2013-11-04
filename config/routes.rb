@@ -33,6 +33,12 @@ Bacu::Application.routes.draw do
   end
 
   resources :games, only: [:index]
+  resource :game, only: [] do
+    member do
+      get :edit
+      post :update
+    end
+  end
 
   get '/auth/twitter/callback' => 'sessions#twitter_create'
   resource :session, only: [:destroy]
