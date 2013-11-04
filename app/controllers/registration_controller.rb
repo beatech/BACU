@@ -1,4 +1,5 @@
 class RegistrationController < ApplicationController
+  layout 'layouts/single_column'
   before_filter :registration_check
 
   def index

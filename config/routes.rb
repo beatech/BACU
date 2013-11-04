@@ -27,6 +27,8 @@ Bacu::Application.routes.draw do
   resource :master, only: [] do
     member do
       get :index
+      get :edit
+      post :update
     end
   end
 

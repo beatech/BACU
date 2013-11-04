@@ -6,12 +6,12 @@
         %ul.nav
           %li{ class: current_page?(root_url) ? 'active' : '' }
             = link_to 'ホーム', root_url
-          %li{ class: current_page?(entries_path) ? 'active' : '' }
-            = link_to 'ページ一覧', entries_path
           %li{ class: current_page?(master_path) ? 'active' : '' }
             = link_to 'マスター部門', master_path
           %li{ class: current_page?(games_path) ? 'active' : '' }
             = link_to '機種別部門', games_path
+          %li{ class: current_page?(entries_path) ? 'active' : '' }
+            = link_to 'ページ一覧', entries_path
         %ul.nav.pull-right
           - if @twitter_account
             %li.dropdown

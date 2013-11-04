@@ -1,7 +1,10 @@
 %h2
   マスター部門
-  = link_to 'スコアを編集する', '#', class: 'btn btn-primary'
-
+  - if @twitter_account && @twitter_account.user.present?
+    - if @twitter_account.user.circle_id != 0
+      = link_to 'スコアを編集する', edit_master_path, class: 'btn btn-primary'
+    - else
+      %a{href: edit_user_path, style: 'font-size: 18px; color: #00a;'} 所属サークルを設定するとスコアが登録できるようになります
 
 %ul.nav.nav-tabs
   %li.active
@@ -12,7 +15,6 @@
     = link_to '曲目', '#musics', :'data-toggle' => 'tab'
 
 .tab-content
-
   #circles.tab-pane.active
     %table.table.table-bordered.table-striped
       %thead
@@ -25,7 +27,7 @@
         - last_rank = 1
         - @circles.each_with_index do |circle, index|
           - unless last_score == circle.total_score
-            - last_score = cicle.total_score
+            - last_score = circle.total_score
             - last_rank = index + 1
           %tr
             %td= last_rank
@@ -33,7 +35,25 @@
             %td= circle.total_score
 
   #users.tab-pane
-    hoge
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %td 順位
+          %td 名前
+          %td サークル
+          %td スコア
+      %tbody
+        - last_score = 0
+        - last_rank = 1
+        - @users.each_with_index do |user, index|
+          - unless last_score == user.total_score
+            - last_score = user.total_score
+            - last_rank = index + 1
+          %tr
+            %td= last_rank
+            %td= user.name
+            %td= user.circle_name
+            %td= user.total_score
 
   #musics.tab-pane
     %table.table.table-bordered.table-striped

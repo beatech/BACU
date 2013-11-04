@@ -1,0 +1,25 @@
+= link_to '戻る', master_path
+
+%h3
+  マスター部門 スコア編集
+
+= form_tag(master_path) do
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %td 機種
+        %td 曲名
+        %td スコア
+    %tbody
+      - Game.all.each do |game|
+        - game.master_musics.each_with_index do |music, index|
+          %tr
+            - if index == 0
+              %td{ rowspan: 2 }= game.title
+            %td= music.title
+            %td
+              - score = Master::Score.where(master_user_id: @user.id, master_music_id: music.id).first
+              - unless score.present?
+                - score = Master::Score.create(master_user_id: @user.id, master_music_id: music.id, basic_score: 0, score: 0)
+              = number_field_tag "music[#{music.id}]", score.basic_score
+  = submit_tag 'スコアを更新する', class: 'btn btn-primary'
