@@ -1,14 +1,4 @@
 class SessionsController < ApplicationController
-  def create
-    user = User.authenticate(params[:username], params[:password])
-    if user
-      session[:uid] = user.username
-      redirect_to :back
-    else
-      redirect_to root_url, notice: 'ログインに失敗しました。'
-    end
-  end
-
   def destroy
     session[:uid] = nil
     redirect_to root_url

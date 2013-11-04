@@ -1,0 +1,16 @@
+.registration_form
+  = form_for @circle do |f|
+    .section
+      = f.hidden_field :twitter_account_id
+      Twitterアカウント: @#{@twitter_account.screen_name}
+    .section
+      サークル名:
+      = f.text_field :name
+    .section
+      大学名:
+      = f.text_field :university
+    .section
+      ホームページURL:
+      = f.text_field :url
+    .section
+      = f.submit submit_label, class: 'btn btn-primary'

@@ -1,5 +1,8 @@
 TwitterAccount.all.each { |ta| ta.destroy }
 Circle.all.each { |c| c.destroy }
+User.all.each { |u| u.destroy }
+Game.all.each { |g| g.destroy }
+Master::Music.all.each { |m| m.destroy }
 
 top = Entry.where(id: 1).first
 unless top
@@ -78,4 +81,22 @@ circle_accounts.each do |circle_account|
       url: circle_account[:url],
     )
   end
+end
+
+games = [
+  {title: '弐寺', mt1: 'Inferno [SPA]', md1: '☆9', mt2: 'quasar[SPA]', md2: '☆11'},
+  {title: 'pop\'n', mt1: '秋（autumn G）[H]', md1: 'Lv31', mt2: 'わんわんコア（ポチコの幸せな日常）[EX]', md2: 'Lv45'},
+  {title: '指', mt1: 'LANA - キロクノカケラ (sasakure.UK Framework Remix) -[EXT]', md1: 'Lv8', mt2: '11/4 12:00よりいまだけ楽曲で遊べる新曲[EXT]', md2: 'Lv10'},
+  {title: 'REFLEC', mt1: 'つばめ[H]', md1: 'Lv8', mt2: 'Windy Fairy[H]', md2: 'Lv10'},
+  {title: 'DDR', mt1: 'Condor[DIF]', md1: '足9', mt2: 'Another Phase[EXP]', md2: '足15'},
+  {title: 'GF', mt1: 'しっぽのロック[EXP-B]', md1: '5.25', mt2: 'Jasper[EXT-G]', md2: '7.55'},
+  {title: 'DM', mt1: 'Chronos[ADV]', md1: '5.25', mt2: '三毛猫ロックンロール[EXT]', md2: '8.00'},
+  {title: 'SDVX', mt1: 'candii[EXH]', md1: 'Lv11', mt2: 'GEROL[EXH]', md2: 'Lv14'},
+  {title: 'ダンエボ', mt1: 'なめこのうた[MASTER]', md1: 'Lv1', mt2: 'サイバーサンダーサイダー[MASTER]', md2: 'Lv3'},
+]
+
+games.each do |game|
+  g = Game.create(title: game[:title])
+  Master::Music.create(title: game[:mt1], difficulty: game[:md1], game_id: g.id)
+  Master::Music.create(title: game[:mt2], difficulty: game[:md2], game_id: g.id)
 end

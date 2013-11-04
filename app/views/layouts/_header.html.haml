@@ -4,8 +4,14 @@
       .container
         = link_to 'BACU', root_url, class: 'brand'
         %ul.nav
-          %li.active= link_to 'ホーム', root_url
-          %li= link_to 'ページ一覧', entries_path
+          %li{ class: current_page?(root_url) ? 'active' : '' }
+            = link_to 'ホーム', root_url
+          %li{ class: current_page?(entries_path) ? 'active' : '' }
+            = link_to 'ページ一覧', entries_path
+          %li{ class: current_page?(master_path) ? 'active' : '' }
+            = link_to 'マスター部門', master_path
+          %li{ class: current_page?(games_path) ? 'active' : '' }
+            = link_to '機種別部門', games_path
         %ul.nav.pull-right
           - if @twitter_account
             %li.dropdown
@@ -14,8 +20,13 @@
                 %b.caret
               %ul.dropdown-menu
                 - if @twitter_account.registered?
-                  %li= link_to 'hoge', '#'
+                  - if @twitter_account.user.present?
+                    %li= link_to 'プロフィールを編集', edit_user_path
+                  - else
+                    %li= link_to '登録情報を編集', edit_circle_path
                 - else
                   %li= link_to 'エントリーする', registration_path
+                %li.divider
+                %li= link_to 'ログアウト', session_path, method: :delete
           - else
             %li= link_to 'Twitterでログイン', '/auth/twitter'

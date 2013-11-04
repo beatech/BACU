@@ -1,0 +1,14 @@
+= form_for(@user) do |f|
+  .section
+    = f.hidden_field :twitter_account_id
+    Twitterアカウント: @#{@twitter_account.screen_name}
+  .section
+    = label :circle, :name, '名前: '
+    = f.text_field :name
+  .section
+    = label :circle, :id, '所属サークル: '
+    - selectable_params = [['あとで選択する', 0]]
+    - Circle.all.order('name ASC').map { |m| selectable_params << [m.name, m.id] }
+    = f.select :circle_id, selectable_params
+  .section
+    = f.submit submit_label, class: 'btn btn-primary'

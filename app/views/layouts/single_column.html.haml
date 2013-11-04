@@ -1,0 +1,13 @@
+!!!
+%html{lang: 'ja'}
+  = render 'layouts/head'
+  %body
+    = render 'layouts/header'
+    .container
+      .hero-unit
+        %h3 BACU 音ゲーサークル対抗戦
+      .contents_wrapper.clearfix
+        .single_column
+          .contents
+            = yield
+      = render 'layouts/footer'

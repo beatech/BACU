@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
     if session[:uid]
       @twitter_account = TwitterAccount.find_by_uid(session[:uid])
       session.delete(:uid) unless @twitter_account
+    else
+      @twitter_account = nil
     end
   end
 
@@ -15,6 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def registration_action?
+    return true if controller_name == 'sessions'
     return true if controller_name == 'registration'
     return true if controller_name == 'circles' && action_name == 'create'
     return true if controller_name == 'users' && action_name == 'create'

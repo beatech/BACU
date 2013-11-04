@@ -1,0 +1,51 @@
+%h2
+  マスター部門
+  = link_to 'スコアを編集する', '#', class: 'btn btn-primary'
+
+
+%ul.nav.nav-tabs
+  %li.active
+    = link_to 'サークルランキング', '#circles', :'data-toggle' => 'tab'
+  %li
+    = link_to '個人ランキング', '#users', :'data-toggle' => 'tab'
+  %li
+    = link_to '曲目', '#musics', :'data-toggle' => 'tab'
+
+.tab-content
+
+  #circles.tab-pane.active
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %td 順位
+          %td サークル
+          %td スコア
+      %tbody
+        - last_score = 0
+        - last_rank = 1
+        - [].each_with_index do |circle, index|
+          - unless last_score == circle.total_score
+            - last_score = cicle.total_score
+            - last_rank = index + 1
+          %tr
+            %td= last_rank
+            %td= circle.name
+            %td= circle.total_score
+
+  #users.tab-pane
+    hoge
+
+  #musics.tab-pane
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %td 機種
+          %td{ colspan: 2 } 課題曲その1（KAC関係なく簡単なもの）
+          %td{ colspan: 2 } 課題曲その2（KACに被せる）
+      %tbody
+        - Game.all.each do |game|
+          %tr
+            %td= game.title
+            - game.master_musics.each do |music|
+              %td= music.difficulty
+              %td= music.title
