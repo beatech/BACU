@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  before_filter :require_admin, only: [:new, :edit, :create, :update]
   FRONTPAGE_ID = 1
 
   def index
@@ -26,10 +27,9 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(user_params)
-    @entry.entry_type = 0
 
     if @entry.save
-      redirect_to edit_entry_path(@entry.url), notice: 'ページの作成に成功しました。'
+      redirect_to entries_path
     else
       redirect_to new_entry_path
     end
@@ -39,7 +39,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
 
     if @entry.update_attributes(user_params)
-      redirect_to entry_path(@entry), notice: 'ページを更新しました。'
+      redirect_to entries_path
     else
       redirect_to edit_entry_path(@entry)
     end
@@ -63,5 +63,9 @@ class EntriesController < ApplicationController
   private
   def user_params
     params.require(:entry).permit(:title, :content)
+  end
+
+  def require_admin
+    redirect_to root_url unless @twitter_account && @twitter_account.admin?
   end
 end

@@ -8,4 +8,8 @@ class TwitterAccount < ActiveRecord::Base
   def registered?
     self.user.present? || self.circle.present?
   end
+
+  def admin?
+    %w(ikstrm chi08ka sophimet).include?(screen_name)
+  end
 end
