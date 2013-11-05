@@ -4,7 +4,7 @@
   マスター部門 スコア編集
 
 = form_tag(master_path) do
-  = hidden_field_tag :user_id, @user.id
+  = hidden_field_tag :user_id, @twitter_account.user.id
   %table.table.table-bordered.table-striped
     %thead
       %tr
