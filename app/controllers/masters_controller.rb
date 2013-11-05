@@ -30,7 +30,9 @@ class MastersController < ApplicationController
   end
 
   def update
-    master_user = @twitter_account.user.master_user
+    user = User.find(params[:user_id])
+    redirect_to master_path unless user && user.master_user.present?
+    master_user = user.master_user
     Master::Music.all.each do |music|
       score = Master::Score.where(
         master_user_id: master_user.id,
