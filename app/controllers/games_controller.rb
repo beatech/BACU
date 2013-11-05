@@ -11,7 +11,7 @@ class GamesController < ApplicationController
     redirect_to games_path unless user.present?
     Game.all.each do |game|
       total_score = 0
-      game_total = Game::Total.where(user_id: 1, game_id: game.id).first
+      game_total = Game::Total.where(user_id: user.id, game_id: game.id).first
       game_total = Game::Total.create(game_id: game.id, user_id: user.id, total_score: 0) if game_total.blank?
       game.game_musics.each do |music|
         game_score = Game::Score.where(game_total_id: game_total.id, game_music_id: music.id).first
