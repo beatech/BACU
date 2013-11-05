@@ -1,10 +1,19 @@
 %h2
   マスター部門
-  - if @twitter_account && @twitter_account.user.present?
-    - if @twitter_account.user.circle_id != 0
-      = link_to 'スコアを編集する', edit_master_path, class: 'btn btn-primary'
-    - else
-      %a{href: edit_user_path, style: 'font-size: 18px; color: #00a;'} 所属サークルを設定するとスコアが登録できるようになります
+  - if @twitter_account
+    - if @twitter_account.user.present?
+      - if @twitter_account.user.circle_id != 0
+        = link_to 'スコアを編集する', edit_master_path, class: 'btn btn-primary'
+      - else
+        %a{href: edit_user_path, style: 'font-size: 18px; color: #00a;'} 所属サークルを設定するとスコアが登録できるようになります
+    - elsif @twitter_account.circle.present?
+      .btn-group
+        = link_to '#', class: 'btn btn-primary dropdown-toggle', :'data-toggle' => 'dropdown' do
+          サークルメンバーのスコアを編集する
+          %span.caret
+        %ul.dropdown-menu
+          - @twitter_account.circle.users.each do |user|
+            %li= link_to user.name, master_circle_edit_user_path(user)
 
 %ul.nav.nav-tabs
   %li.active

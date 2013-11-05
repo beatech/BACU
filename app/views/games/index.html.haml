@@ -3,8 +3,17 @@
 
 %h2
   機種別部門
-  - if @twitter_account && @twitter_account.user.present?
-    = link_to 'スコアを編集する', edit_game_path, class: 'btn btn-primary'
+  - if @twitter_account
+    - if @twitter_account.user.present?
+      = link_to 'スコアを編集する', edit_game_path, class: 'btn btn-primary'
+    - elsif @twitter_account.circle.present?
+      .btn-group
+        = link_to '#', class: 'btn btn-primary dropdown-toggle', :'data-toggle' => 'dropdown' do
+          サークルメンバーのスコアを編集する
+          %span.caret
+        %ul.dropdown-menu
+          - @twitter_account.circle.users.each do |user|
+            %li= link_to user.name, games_circle_edit_user_path(user)
 
 %ul.nav.nav-tabs
   - Game.all.each_with_index do |game, index|

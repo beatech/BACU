@@ -8,7 +8,14 @@ Bacu::Application.routes.draw do
     end
   end
 
-  resources :users, only: [:create]
+  resources :users, only: [:create] do
+    member do
+      get :master_circle_edit
+      post :master_circle_update
+      get :games_circle_edit
+      post :games_circle_update
+    end
+  end
   resource :user, only: [:edit, :update] do
     member do
       get :welcome
