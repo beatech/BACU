@@ -25,7 +25,8 @@
             - game.game_musics.each do |music|
               %td= music.title
         %tbody{ id: "score_ranking#{game.id}" }
-          /= render partial: 'games/game_score_ranking', locals: { game: game }
+          %tr
+            %td{ colspan: 7 } Now loading...
 
   #game0.tab-pane
     %table.table.table-bordered.table-striped
