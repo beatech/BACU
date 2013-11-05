@@ -39,7 +39,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
 
     if @entry.update_attributes(user_params)
-      redirect_to entries_path
+      redirect_to entry_path(@entry)
     else
       redirect_to edit_entry_path(@entry)
     end
