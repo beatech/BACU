@@ -32,11 +32,7 @@ Bacu::Application.routes.draw do
     end
   end
 
-  resources :games, only: [:index] do
-    member do
-      post :score_ranking
-    end
-  end
+  resources :games, only: [:index]
   resource :game, only: [] do
     member do
       get :edit
