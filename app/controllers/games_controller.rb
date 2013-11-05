@@ -7,7 +7,8 @@ class GamesController < ApplicationController
   end
 
   def update
-    user = @twitter_account.user
+    user = User.find(params[:user_id])
+    redirect_to games_path unless user.present?
     Game.all.each do |game|
       total_score = 0
       game_total = Game::Total.where(user_id: 1, game_id: game.id).first

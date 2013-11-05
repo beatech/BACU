@@ -4,6 +4,7 @@
   機種別部門 スコア編集
 
 = form_tag(game_path) do
+  = hidden_field_tag :user_id, @twitter_account.user_id
   %table.table.table-bordered.table-striped
     %thead
       %tr
