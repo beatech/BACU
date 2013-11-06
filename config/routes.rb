@@ -40,12 +40,10 @@ Bacu::Application.routes.draw do
   end
   namespace :master do
     resources :musics, only: [:index]
-    resource :music, only: [:edit, :update]
   end
 
   namespace :games do
     resources :musics, only: [:index]
-    resource :music, only: [:edit, :update]
   end
   resources :games, only: [:index] do
     member do
