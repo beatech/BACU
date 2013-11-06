@@ -64,8 +64,4 @@ class EntriesController < ApplicationController
   def user_params
     params.require(:entry).permit(:title, :content)
   end
-
-  def require_admin
-    redirect_to root_url unless @twitter_account && @twitter_account.admin?
-  end
 end

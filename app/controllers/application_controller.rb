@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
     return true if controller_name == 'users' && action_name == 'create'
     false
   end
+
+  def require_admin
+    redirect_to root_url unless @twitter_account && @twitter_account.admin?
+  end
 end
