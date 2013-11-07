@@ -17,33 +17,12 @@
 
 %ul.nav.nav-tabs
   %li.active
-    = link_to 'サークルランキング', '#circles', :'data-toggle' => 'tab'
-  %li
     = link_to '個人ランキング', '#users', :'data-toggle' => 'tab'
   %li
     = link_to '曲目', '#musics', :'data-toggle' => 'tab'
 
 .tab-content
-  #circles.tab-pane.active
-    %table.table.table-bordered.table-striped
-      %thead
-        %tr
-          %td 順位
-          %td サークル
-          %td スコア
-      %tbody
-        - last_score = 0
-        - last_rank = 1
-        - @circles.each_with_index do |circle, index|
-          - unless last_score == circle.total_score
-            - last_score = circle.total_score
-            - last_rank = index + 1
-          %tr
-            %td= last_rank
-            %td= circle.name
-            %td= circle.total_score
-
-  #users.tab-pane
+  #users.tab-pane.active
     %table.table.table-bordered.table-striped
       %thead
         %tr

@@ -1,7 +1,7 @@
 Bacu::Application.routes.draw do
   resources :entries
 
-  resources :circles, only: [:create]
+  resources :circles, only: [:index, :show, :create]
   resource :circle, only: [:edit, :update] do
     member do
       get :welcome

@@ -1,8 +1,15 @@
 class CirclesController < ApplicationController
+  layout 'layouts/single_column'
   before_filter :require_login, only: [:edit, :update]
 
-  def require_login
-    redirect_to root_url unless @twitter_account && @twitter_account.circle.present?
+  def index
+    @circles = Circle.all.map { |circle|
+      if circle.master_circle
+        circle.master_circle
+      else
+        Master::Circle.create(circle_id: circle.id, total_score: 0)
+      end
+    }.sort_by(&:total_score).reverse
   end
 
   def create
@@ -34,5 +41,9 @@ class CirclesController < ApplicationController
 
   def update_params
     params.require(:circle).permit(:name, :university, :url)
+  end
+
+  def require_login
+    redirect_to root_url unless @twitter_account && @twitter_account.circle.present?
   end
 end

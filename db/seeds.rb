@@ -1,3 +1,24 @@
+last_number = 2
+Master::Music.all.each do |music|
+  last_number = case last_number
+                when 1 then 2
+                else 1
+                end
+  music.music_order = last_number
+  music.save
+end
+
+last_number = 3
+Game::Music.all.each do |music|
+  last_number = case last_number
+                when 1 then 2
+                when 2 then 3
+                else 1
+                end
+  music.music_order = last_number
+  music.save
+end
+=begin
 TwitterAccount.all.each { |ta| ta.destroy }
 Circle.all.each { |c| c.destroy }
 User.all.each { |u| u.destroy }
@@ -103,3 +124,4 @@ games.each do |game|
   Game::Music.create(title: game[:gt2], difficulty: game[:gd2], game_id: g.id)
   Game::Music.create(title: game[:gt3], difficulty: game[:gd3], game_id: g.id)
 end
+=end

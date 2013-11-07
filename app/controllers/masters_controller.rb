@@ -3,14 +3,6 @@ class MastersController < ApplicationController
   before_filter :require_login, only: [:edit, :update]
 
   def index
-    @circles = Circle.all.map { |circle|
-      if circle.master_circle
-        circle.master_circle
-      else
-        Master::Circle.create(circle_id: circle.id, total_score: 0)
-      end
-    }.sort_by(&:total_score).reverse
-
     @users = User.all.map { |user|
       if user.master_user
         user.master_user
