@@ -48,6 +48,7 @@ Bacu::Application.routes.draw do
   resources :games, only: [:index] do
     member do
       post :score_ranking
+      post :master_score_ranking
     end
   end
   resource :game, only: [] do

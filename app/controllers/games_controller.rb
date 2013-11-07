@@ -31,6 +31,11 @@ class GamesController < ApplicationController
     respond_to { |format| format.js }
   end
 
+  def master_score_ranking
+    @game = Game.find(params[:id])
+    respond_to { |format| format.js }
+  end
+
   private
   def require_login
     redirect_to root_url unless @twitter_account && @twitter_account.user.present?

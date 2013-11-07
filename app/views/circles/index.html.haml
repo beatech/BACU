@@ -1,0 +1,27 @@
+= link_to 'ホームに戻る', root_url
+
+%h1 サークルランキング
+%p
+  マスター部門、機種別部門の各サークルの成果によりサークル得点をルールに則り計算し、
+  毎時0分に更新しています。
+
+#circles
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %td 順位
+        %td サークル
+        %td 大学
+        %td 得点
+    %tbody
+      - last_score = 0
+      - last_rank = 1
+      - @circles.each_with_index do |circle, index|
+        - unless last_score == circle.total_score
+          - last_score = circle.total_score
+          - last_rank = index + 1
+        %tr
+          %td= last_rank
+          %td= circle.name
+          %td= circle.circle.university
+          %td= circle.total_score

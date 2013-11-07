@@ -6,8 +6,8 @@
         %ul.nav
           %li{ class: current_page?(root_url) ? 'active' : '' }
             = link_to 'ホーム', root_url
-          %li{ class: current_page?(circles_path) ? 'active' : '' }
-            = link_to 'サークルランキング', circles_path
+          -#%li{ class: current_page?(circles_path) ? 'active' : '' }
+            = link_to 'サークル一覧', circles_path
           %li{ class: current_page?(master_path) ? 'active' : '' }
             = link_to 'マスター部門', master_path
           %li{ class: current_page?(games_path) ? 'active' : '' }

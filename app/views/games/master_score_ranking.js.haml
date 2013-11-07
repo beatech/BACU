@@ -1,0 +1,4 @@
+:plain
+  $("#game#{@game.id}").html(
+    "#{escape_javascript(render partial: 'masters/score_ranking', locals: { game: @game })}"
+  );
