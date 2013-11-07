@@ -41,7 +41,7 @@ Bacu::Application.routes.draw do
   end
   namespace :master do
     resources :musics, only: [:index]
-    resource :music, only: [] do
+    resource :music, only: [:edit, :update] do
       member do
         post :ajax_load
       end

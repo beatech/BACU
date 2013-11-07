@@ -5,7 +5,7 @@ class Master::Music < ActiveRecord::Base
   validates :difficulty, presence: true
   validates :game_id, presence: true
 
-  def update_scores
+  def update_scores_for_1st_order
     min_standard_score = 1000
     @master_scores = Master::Score.where(master_music_id: self.id)
     @average = basic_score_average
