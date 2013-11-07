@@ -1,4 +1,4 @@
 :plain
-  $("#score_ranking#{@game.id}").html(
+  $("#game#{@game.id}").html(
     "#{escape_javascript(render partial: 'games/game_score_ranking', locals: { game: @game })}"
   );

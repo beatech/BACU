@@ -24,18 +24,7 @@
 .tab-content
   - Game.all.each_with_index do |game, index|
     .tab-pane{ class: index == 0 ? 'active' : '', id: "game#{game.id}" }
-      %table.table.table-bordered.table-striped
-        %thead
-          %tr
-            %td 順位
-            %td 名前
-            %td サークル
-            %td 合計スコア
-            - game.game_musics.each do |music|
-              %td= music.title
-        %tbody{ id: "score_ranking#{game.id}" }
-          %tr
-            %td{ colspan: 7 } Now loading...
+      Now Loading...
 
   #game0.tab-pane
     %table.table.table-bordered.table-striped
