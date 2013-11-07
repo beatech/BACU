@@ -20,4 +20,8 @@ class Games::MusicsController < ApplicationController
     end
     redirect_to games_musics_path
   end
+
+  def ajax_load
+    respond_to { |format| format.js }
+  end
 end

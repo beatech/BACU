@@ -6,3 +6,5 @@ jQuery ($)->
   while (game_id <= GAME_NUM)
     $.post('/games/' + game_id + '/master_score_ranking')
     game_id += 1
+
+  $.post('/master/music/ajax_load')

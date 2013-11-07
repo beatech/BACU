@@ -38,16 +38,4 @@
       Now Loading...
 
   #musics.tab-pane
-    %table.table.table-bordered.table-striped
-      %thead
-        %tr
-          %td 機種
-          %td{ colspan: 2 } 課題曲その1（KAC関係なく簡単なもの）
-          %td{ colspan: 2 } 課題曲その2（KACに被せる）
-      %tbody
-        - Game.all.each do |game|
-          %tr
-            %td= game.title
-            - game.master_musics.each do |music|
-              %td= music.difficulty
-              %td= music.title
+    Now Loading...

@@ -20,4 +20,8 @@ class Master::MusicsController < ApplicationController
     end
     redirect_to master_musics_path
   end
+
+  def ajax_load
+    respond_to { |format| format.js }
+  end
 end
