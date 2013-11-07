@@ -1,4 +1,6 @@
 class Master::Music < ActiveRecord::Base
+  MAX_INTEGER = 1000
+
   belongs_to :game
   has_many :master_scores, class_name: 'Master::Score'
   validates :title, presence: true
@@ -6,7 +8,7 @@ class Master::Music < ActiveRecord::Base
   validates :game_id, presence: true
 
   def update_scores_for_1st_order
-    min_standard_score = 1000
+    min_standard_score = MAX_INTEGER
     @master_scores = Master::Score.where(master_music_id: self.id)
     @average = basic_score_average
     @standard_deviation = standard_deviation(@average)
@@ -19,7 +21,7 @@ class Master::Music < ActiveRecord::Base
       end
     end
 
-    min_standard_score = 50 if min_standard_score == 1000
+    min_standard_score = 50 if min_standard_score == MAX_INTEGER
     @master_scores.select{ |s| s.basic_score == 0 }.each do |zero_master_score|
       zero_master_score.score = min_standard_score - 10
       zero_master_score.save
@@ -29,7 +31,7 @@ class Master::Music < ActiveRecord::Base
   # 基礎点(素のスコア)の平均
   def basic_score_average
     basic_score_sum = Master::Score.where(master_music_id: self.id).inject(0) { |basic_score_sum, master_score|
-      basic_score_sum + master_score.basic_score
+      basic_score_sum + master_score.basic_score_for_point
     }
     basic_score_sum.to_f / Master::Score.where(master_music_id: self.id).select{ |s| s.basic_score > 0 }.count
   end
@@ -39,8 +41,8 @@ class Master::Music < ActiveRecord::Base
     sum = 0
     num = 0
     Master::Score.where(master_music_id: self.id).each do |master_score|
-      if master_score.basic_score > 0
-        sum += (master_score.basic_score - average)**2
+      if master_score.basic_score_for_point > 0
+        sum += (master_score.basic_score_for_point - average)**2
         num += 1
       end
     end
@@ -68,5 +70,15 @@ class Master::Music < ActiveRecord::Base
     end
 
     gap.to_f + 50
+  end
+
+  def update_scores_for_2nd_order
+    @master_scores = Master::Score.where(master_music_id: self.id)
+    @average = basic_score_average
+    @standard_deviation = standard_deviation(@average)
+    @master_scores.all.each do |master_score|
+      master_score.score = standard_score(master_score.basic_score_for_point, @average, @standard_deviation)
+      master_score.save
+    end
   end
 end

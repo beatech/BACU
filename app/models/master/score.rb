@@ -6,12 +6,21 @@ class Master::Score < ActiveRecord::Base
   validates :basic_score, presence: true
   validates :score, presence: true
 
-  def update_basic_score(new_basic_score)
-    if self.basic_score != new_basic_score
-      self.basic_score = new_basic_score
-      self.save
+  # 課題曲2用 insurance_scoreとbasic_scoreの高い方を返す
+  def insuranced_basic_score
+    insurance_score = self.master_music.insurance_score
+    if insurance_score && insurance_score > 0 && insurance_score > self.basic_score
+      insurance_score
+    else
+      basic_score
+    end
+  end
 
-      self.master_music.update_scores
+  def basic_score_for_point
+    if self.master_music.music_order == 2
+      self.insuranced_basic_score
+    else
+      self.basic_score
     end
   end
 end

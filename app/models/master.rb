@@ -9,7 +9,6 @@ module Master
     self.update_1st_order_scores
     self.update_2nd_order_scores
     Master::User.update_total_score
-    Master::Circle.update_total_score
   end
 
   def self.prepare_master_users
@@ -29,10 +28,13 @@ module Master
 
   def self.update_1st_order_scores
     Master::Music.where(music_order: 1).each do |master_music|
-      master_music.update_scores
+      master_music.update_scores_for_1st_order
     end
   end
 
   def self.update_2nd_order_scores
+    Master::Music.where(music_order: 2).each do |master_music|
+      master_music.update_scores_for_2nd_order
+    end
   end
 end
