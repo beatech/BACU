@@ -1,4 +1,6 @@
 jQuery ($)->
+  $.post('/master/load_users')
+
   GAME_NUM = 9
   game_id = 1
   while (game_id <= GAME_NUM)

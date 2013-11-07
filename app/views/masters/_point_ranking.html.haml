@@ -1,0 +1,19 @@
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %td 順位
+      %td 名前
+      %td サークル
+      %td 合計得点
+  %tbody
+    - last_score = 0
+    - last_rank = 1
+    - Master::User.order('total_score desc').each_with_index do |user, index|
+      - unless last_score == user.total_score
+        - last_score = user.total_score
+        - last_rank = index + 1
+      %tr
+        %td= last_rank
+        %td= user.name
+        %td= user.circle_name
+        %td= user.total_score

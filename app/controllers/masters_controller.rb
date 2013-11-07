@@ -3,13 +3,6 @@ class MastersController < ApplicationController
   before_filter :require_login, only: [:edit, :update]
 
   def index
-    @users = User.all.map { |user|
-      if user.master_user
-        user.master_user
-      else
-        Master::User.create(user_id: user.id, total_score: 0)
-      end
-    }.sort_by(&:total_score).reverse
   end
 
   def edit
@@ -34,6 +27,10 @@ class MastersController < ApplicationController
       score.save
     end
     redirect_to master_path
+  end
+
+  def load_users
+    respond_to { |format| format.js }
   end
 
   private

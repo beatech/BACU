@@ -36,6 +36,7 @@ Bacu::Application.routes.draw do
       get :index
       get :edit
       post :update
+      post :load_users
     end
   end
   namespace :master do
