@@ -9,10 +9,10 @@
             課題曲#{index + 1}
             「#{master_music.title}」
   %tbody
-    - last_score = 0
-    - last_rank = 1
-    - Master::User.order('total_score desc').each_with_index do |master_user, index|
-      - cache master_user do
+    - cache game do
+      - last_score = 0
+      - last_rank = 1
+      - Master::User.order('total_score desc').each_with_index do |master_user, index|
         - unless last_score == master_user.total_score
           - last_score = master_user.total_score
           - last_rank = index + 1
@@ -21,18 +21,16 @@
           %td= master_user.name
 
           - first_music_id = game.master_musics.where(music_order: 1).pluck(:id)
-          - master_score = Master::Score.where(master_music_id: first_music_id, master_user_id: master_user.id).first
-          - cache master_score do
-            %td= master_score ? master_score.score : 0
-            %td= master_score ? master_score.basic_score : 0
+          - first_master_score = Master::Score.where(master_music_id: first_music_id, master_user_id: master_user.id).first
+          %td= first_master_score ? first_master_score.score : 0
+          %td= first_master_score ? first_master_score.basic_score : 0
 
           - second_music = game.master_musics.where(music_order: 2).first
           - master_score = Master::Score.where(master_music_id: second_music.id, master_user_id: master_user.id).first
-          - cache master_score do
-            %td= master_score ? master_score.score : 0
-            - if master_score.basic_score > second_music.insurance_score
-              %td= master_score.basic_score
-            - else
-              %td
-                %span.insurance_score= second_music.insurance_score
-                (#{master_score.basic_score})
+          %td= master_score ? master_score.score : 0
+          - if master_score.basic_score > second_music.insurance_score
+            %td= master_score.basic_score
+          - else
+            %td
+              %span.insurance_score= second_music.insurance_score
+              (#{master_score.basic_score})

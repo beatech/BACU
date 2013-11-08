@@ -33,6 +33,7 @@ class GamesController < ApplicationController
 
   def master_score_ranking
     @game = Game.find(params[:id])
+    @master_users = Master::User.order('total_score desc')
     respond_to { |format| format.js }
   end
 
