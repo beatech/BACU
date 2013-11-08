@@ -7,8 +7,10 @@
       %td{ colspan: 2 } 課題曲3
   %tbody
     - Game.all.each do |game|
-      %tr
-        %td= game.title
-        - game.game_musics.each do |music|
-          %td= music.difficulty
-          %td= music.title
+      - cache game do
+        %tr
+          %td= game.title
+          - game.game_musics.each do |music|
+            - cache music do
+              %td= music.difficulty
+              %td= music.title
