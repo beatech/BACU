@@ -19,8 +19,8 @@
             %li= link_to user.name, master_circle_edit_user_path(user)
 
 %p 課題曲2は、基準点を下回る場合、基準点がスコアとして保証されます。
-%p 得点とスコアは、#{Date.today} #{Time.now.hour}:00 のものです。
-%p ※スコアを更新しても次の0分になるまで反映されません。ご了承ください。
+%p 得点計算は毎時0分に行われます。
+%p ※スコアを更新しても次の0分になるまで得点には反映されません。ご了承ください。
 
 %ul.nav.nav-tabs
   %li.active
@@ -33,11 +33,11 @@
 
 .tab-content
   #users.tab-pane.active
-    = render partial: 'masters/point_ranking'
+    Now Loading...
 
   - Game.all.each do |game|
     .tab-pane{ id: "game#{game.id}" }
-      = render partial: 'masters/score_ranking', locals: { game: game }
+      Now Loading...
 
   #musics.tab-pane
-    = render partial: 'master/musics/ajax_load'
+    Now Loading...

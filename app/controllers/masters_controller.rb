@@ -1,6 +1,4 @@
 class MastersController < ApplicationController
-  caches_page :index
-
   layout 'layouts/single_column'
   before_filter :require_login, only: [:edit, :update]
 

@@ -29,9 +29,7 @@ gem 'omniauth'
 gem 'omniauth-twitter'
 
 gem 'bcrypt-ruby', '~> 3.1.2'
-
 gem 'kaminari'
 gem 'bootstrap-kaminari-views'
-
 gem 'redcarpet'
-gem 'actionpack-page_caching'
+gem 'spring'
