@@ -6,12 +6,15 @@
       %td{ colspan: 3 } 課題曲その2（KACに被せる）
   %tbody
     - Game.all.each do |game|
-      %tr
-        %td= game.title
-        - game.master_musics.where(music_order: 1).each do |music|
-          %td= music.difficulty
-          %td= music.title
-        - game.master_musics.where(music_order: 2).each do |music|
-          %td= music.difficulty
-          %td= music.title
-          %td= music.insurance_score
+      - cache game do
+        %tr
+          %td= game.title
+          - first_music = game.master_musics.where(music_order: 1).first
+          - cache first_music do
+            %td= first_music.difficulty
+            %td= first_music.title
+          - second_music = game.master_musics.where(music_order: 2).first
+          - cache second_music do
+            %td= second_music.difficulty
+            %td= second_music.title
+            %td= second_music.insurance_score

@@ -3,30 +3,38 @@
     %tr
       %td 順位
       %td 名前
-      - game.master_musics.each_with_index do |music, index|
-        %td{ colspan: 2 }
-          課題曲#{index + 1}
-          「#{music.title}」
+      - game.master_musics.each_with_index do |master_music, index|
+        - cache master_music do
+          %td{ colspan: 2 }
+            課題曲#{index + 1}
+            「#{master_music.title}」
   %tbody
     - last_score = 0
     - last_rank = 1
-    - Master::User.order('total_score desc').each_with_index do |user, index|
-      - unless last_score == user.total_score
-        - last_score = user.total_score
-        - last_rank = index + 1
-      %tr
-        %td= last_rank
-        %td= user.name
-        - game.master_musics.where(music_order: 1).each do |music|
-          - master_score = Master::Score.where(master_music_id: music.id, master_user_id: user.id).first
-          %td= master_score ? master_score.score : 0
-          %td= master_score ? master_score.basic_score : 0
-        - game.master_musics.where(music_order: 2).each do |music|
-          - master_score = Master::Score.where(master_music_id: music.id, master_user_id: user.id).first
-          %td= master_score ? master_score.score : 0
-          - if master_score.basic_score > music.insurance_score
-            %td= master_score.basic_score
-          - else
-            %td
-              %span.insurance_score= music.insurance_score
-              (#{master_score.basic_score})
+    - Master::User.order('total_score desc').each_with_index do |master_user, index|
+      - cache master_user do
+        - unless last_score == master_user.total_score
+          - last_score = master_user.total_score
+          - last_rank = index + 1
+        %tr
+          %td= last_rank
+          %td= master_user.name
+
+          - first_music = game.master_musics.where(music_order: 1).first
+          - cache first_music do
+            - master_score = Master::Score.where(master_music_id: first_music.id, master_user_id: master_user.id).first
+            - cache master_score do
+              %td= master_score ? master_score.score : 0
+              %td= master_score ? master_score.basic_score : 0
+
+          - second_music = game.master_musics.where(music_order: 2).first
+          - cache second_music do
+            - master_score = Master::Score.where(master_music_id: first_music.id, master_user_id: master_user.id).first
+            - cache master_score do
+              %td= master_score ? master_score.score : 0
+              - if master_score.basic_score > second_music.insurance_score
+                %td= master_score.basic_score
+              - else
+                %td
+                  %span.insurance_score= second_music.insurance_score
+                  (#{master_score.basic_score})

@@ -33,11 +33,11 @@
 
 .tab-content
   #users.tab-pane.active
-    Now Loading...
+    = render 'masters/point_ranking'
 
   - Game.all.each do |game|
     .tab-pane{ id: "game#{game.id}" }
-      Now Loading...
+      = render 'masters/score_ranking', game: game
 
   #musics.tab-pane
-    Now Loading...
+    = render 'master/musics/music_list'
