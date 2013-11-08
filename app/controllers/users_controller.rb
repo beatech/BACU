@@ -42,10 +42,9 @@ class UsersController < ApplicationController
         master_user_id: master_user.id,
         master_music_id: music.id
       ).first
-      score.update_basic_score(params[:music][music.id.to_s].to_f)
+      score.basic_score = params[:music][music.id.to_s].to_f
+      score.save
     end
-    Master::User.update_total_score
-    Master::Circle.update_total_score
     redirect_to master_path
   end
 
