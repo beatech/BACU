@@ -9,4 +9,5 @@
       %li
         - if @twitter_account && @twitter_account.admin?
           = link_to '編集', edit_entry_path(entry), class: 'btn'
-        = link_to entry.title, entry_path(entry)
+        - cache entry do
+          = link_to entry.title, entry_path(entry)

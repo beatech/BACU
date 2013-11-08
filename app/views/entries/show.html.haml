@@ -1,4 +1,6 @@
 - if @twitter_account && @twitter_account.admin?
   = link_to 'ページを編集する', edit_entry_path(@entry), class: 'btn'
 
-.entry= render_wiki_content(@entry) if @entry
+.entry
+  - cache @entry do
+    = render_wiki_content(@entry) if @entry

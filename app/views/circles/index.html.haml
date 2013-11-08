@@ -16,12 +16,13 @@
       - last_score = 0
       - last_rank = 1
       - @circles.each_with_index do |master_circle, index|
-        - unless last_score == master_circle.total_score
-          - last_score = master_circle.total_score
-          - last_rank = index + 1
-        %tr
-          %td= last_rank
-          %td= link_to master_circle.name, circle_path(master_circle.circle)
-          %td= master_circle.circle.university
-          %td= master_circle.total_score
-          %td= master_circle.circle.users.count
+        - cache master_circle do
+          - unless last_score == master_circle.total_score
+            - last_score = master_circle.total_score
+            - last_rank = index + 1
+          %tr
+            %td= last_rank
+            %td= link_to master_circle.name, circle_path(master_circle.circle)
+            %td= master_circle.circle.university
+            %td= master_circle.total_score
+            %td= master_circle.circle.users.count
