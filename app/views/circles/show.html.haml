@@ -1,0 +1,27 @@
+= link_to 'サークル一覧に戻る', circles_path
+%h2
+  = @circle.university
+  = @circle.name
+%p
+  = link_to 'サークルホームページ', @circle.url
+  大会参加人数 #{@circle.users.count}名
+%p 部内順位は、マスター部門でのものです。
+
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th.span2 部内順位
+      %th 名前
+      %th マスター部門得点
+  %tbody
+    - last_score = 0
+    - last_rank = 1
+    - @circle.master_users.order('total_score desc').each_with_index do |master_user, index|
+      - master_total_score = master_user.total_score
+      - unless last_score == master_total_score
+        - last_score = master_total_score
+        - last_rank = index + 1
+      %tr
+        %td= last_rank
+        %td= master_user.user.name
+        %td= master_total_score

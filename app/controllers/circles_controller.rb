@@ -12,6 +12,10 @@ class CirclesController < ApplicationController
     }.sort_by(&:total_score).reverse
   end
 
+  def show
+    @circle = Circle.find(params[:id])
+  end
+
   def create
     circle = Circle.create(create_params)
     if circle && circle.valid?

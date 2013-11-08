@@ -21,7 +21,7 @@
           - last_rank = index + 1
         %tr
           %td= last_rank
-          %td= master_circle.name
+          %td= link_to master_circle.name, circle_path(master_circle.circle)
           %td= master_circle.circle.university
           %td= master_circle.total_score
           %td= master_circle.circle.users.count
