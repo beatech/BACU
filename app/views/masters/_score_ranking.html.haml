@@ -20,21 +20,19 @@
           %td= last_rank
           %td= master_user.name
 
-          - first_music = game.master_musics.where(music_order: 1).first
-          - cache first_music do
-            - master_score = Master::Score.where(master_music_id: first_music.id, master_user_id: master_user.id).first
-            - cache master_score do
-              %td= master_score ? master_score.score : 0
-              %td= master_score ? master_score.basic_score : 0
+          - first_music_id = game.master_musics.where(music_order: 1).pluck(:id)
+          - master_score = Master::Score.where(master_music_id: first_music_id, master_user_id: master_user.id).first
+          - cache master_score do
+            %td= master_score ? master_score.score : 0
+            %td= master_score ? master_score.basic_score : 0
 
           - second_music = game.master_musics.where(music_order: 2).first
-          - cache second_music do
-            - master_score = Master::Score.where(master_music_id: first_music.id, master_user_id: master_user.id).first
-            - cache master_score do
-              %td= master_score ? master_score.score : 0
-              - if master_score.basic_score > second_music.insurance_score
-                %td= master_score.basic_score
-              - else
-                %td
-                  %span.insurance_score= second_music.insurance_score
-                  (#{master_score.basic_score})
+          - master_score = Master::Score.where(master_music_id: second_music.id, master_user_id: master_user.id).first
+          - cache master_score do
+            %td= master_score ? master_score.score : 0
+            - if master_score.basic_score > second_music.insurance_score
+              %td= master_score.basic_score
+            - else
+              %td
+                %span.insurance_score= second_music.insurance_score
+                (#{master_score.basic_score})
