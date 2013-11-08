@@ -1,3 +1,7 @@
+User.all.each { |u| u.destroy }
+Master::User.all.each { |u| u.destroy }
+Master::Score.all.each { |u| u.destroy }
+=begin
 last_number = 2
 Master::Music.all.each do |music|
   last_number = case last_number
@@ -18,7 +22,7 @@ Game::Music.all.each do |music|
   music.music_order = last_number
   music.save
 end
-=begin
+
 TwitterAccount.all.each { |ta| ta.destroy }
 Circle.all.each { |c| c.destroy }
 User.all.each { |u| u.destroy }

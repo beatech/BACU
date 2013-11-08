@@ -33,7 +33,13 @@ class Master::Music < ActiveRecord::Base
     basic_score_sum = Master::Score.where(master_music_id: self.id).inject(0) { |basic_score_sum, master_score|
       basic_score_sum + master_score.basic_score_for_point
     }
-    basic_score_sum.to_f / Master::Score.where(master_music_id: self.id).select{ |s| s.basic_score > 0 }.count
+    divider = Master::Score.where(master_music_id: self.id)
+      .select{ |s| s.basic_score_for_point > 0 }.count
+    if divider == 0
+      0
+    else
+      basic_score_sum.to_f / divider
+    end
   end
 
   # 分散
