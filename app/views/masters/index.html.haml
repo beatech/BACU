@@ -24,18 +24,19 @@
   %li.active
     = link_to '個人得点ランキング', '#users', :'data-toggle' => 'tab'
   - Game.all.each do |game|
-    %li
-      = link_to game.title, "#game#{game.id}", :'data-toggle' => 'tab'
+    - cache game do
+      %li
+        = link_to game.title, "#game#{game.id}", :'data-toggle' => 'tab'
   %li
     = link_to '曲目', '#musics', :'data-toggle' => 'tab'
 
 .tab-content
   #users.tab-pane.active
-    = render 'masters/point_ranking'
+    Now Loading...
 
   - Game.all.each do |game|
     .tab-pane{ id: "game#{game.id}" }
-      = render 'masters/score_ranking', game: game
+      Now Loading...
 
   #musics.tab-pane
-    = render 'master/musics/music_list'
+    Now Loading...
