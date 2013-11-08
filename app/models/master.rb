@@ -9,6 +9,7 @@ module Master
     self.update_1st_order_scores
     self.update_2nd_order_scores
     Master::User.update_total_score
+    self.expire_master_index
   end
 
   def self.prepare_master_users
@@ -36,5 +37,9 @@ module Master
     Master::Music.where(music_order: 2).each do |master_music|
       master_music.update_scores_for_2nd_order
     end
+  end
+
+  def self.expire_master_index
+    ActionController::Base.expire_page('/master')
   end
 end

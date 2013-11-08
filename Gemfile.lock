@@ -10,6 +10,8 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    actionpack-page_caching (1.0.1)
+      actionpack (>= 4.0.0, < 5)
     activemodel (4.0.1)
       activesupport (= 4.0.1)
       builder (~> 3.1.0)
@@ -179,6 +181,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionpack-page_caching
   bcrypt-ruby (~> 3.1.2)
   bootstrap-kaminari-views
   bootstrap-sass
