@@ -17,7 +17,16 @@
       %tr
         %td= last_rank
         %td= user.name
-        - game.master_musics.each do |music|
+        - game.master_musics.where(music_order: 1).each do |music|
           - master_score = Master::Score.where(master_music_id: music.id, master_user_id: user.id).first
           %td= master_score ? master_score.score : 0
           %td= master_score ? master_score.basic_score : 0
+        - game.master_musics.where(music_order: 2).each do |music|
+          - master_score = Master::Score.where(master_music_id: music.id, master_user_id: user.id).first
+          %td= master_score ? master_score.score : 0
+          - if master_score.basic_score > music.insurance_score
+            %td= master_score.basic_score
+          - else
+            %td
+              %span.insurance_score= music.insurance_score
+              (#{master_score.basic_score})
