@@ -34,3 +34,5 @@ gem 'kaminari'
 gem 'bootstrap-kaminari-views'
 
 gem 'redcarpet'
+
+gem 'delayed_job_active_record'

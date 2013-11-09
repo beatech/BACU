@@ -26,6 +26,10 @@ class MastersController < ApplicationController
       score.basic_score = params[:music][music.id.to_s].to_f
       score.save
     end
+    Master::Score.first.delay.update_all_scores
+    Game.all.each do |game|
+      game.touch
+    end
     redirect_to master_path
   end
 
