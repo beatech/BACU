@@ -5,6 +5,7 @@
       %td{ colspan: 2 } 課題曲1
       %td{ colspan: 2 } 課題曲2
       %td{ colspan: 2 } 課題曲3
+      %td 備考
   %tbody
     - Game.all.each do |game|
       - cache game do
@@ -14,3 +15,15 @@
             - cache music do
               %td= music.difficulty
               %td= music.title
+          %td
+            - case game.id
+            - when 1
+              アシスト、H-RAN使用不可
+            - when 5
+              CUTオプション使用不可
+            - when 6
+              CUT、ランダムオプション使用不可
+            - when 7
+              CUT、ミラーオプション使用不可
+            - when 9
+              難易度はマスター固定

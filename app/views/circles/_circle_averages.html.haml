@@ -1,0 +1,15 @@
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %td 順位
+      %td サークル
+      %td 総合平均
+      %td サークル得点
+
+  %tbody
+    - Master::Circle.order('all_average DESC').each_with_index do |master_circle, index|
+      %tr
+        %td= index + 1
+        %td= master_circle.circle.name
+        %td= master_circle.all_average
+        %td= master_circle.all_average_point

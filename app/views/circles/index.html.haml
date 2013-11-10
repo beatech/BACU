@@ -1,28 +1,41 @@
+= content_for :js do
+  = javascript_include_tag 'circles/index'
+
 = link_to 'ホームに戻る', root_url
 
-%h1 サークル一覧
-%p サークル得点計算は現在調整中です。ご迷惑をお掛けいたします。
+%h1 サークル得点
+%p 合計参加人数 #{User.count}名
+%p サークル得点は、以下の4つにより決まります。
+%ul
+  %li マスター部門個人ランキング
+  %li マスター部門機種別サークル平均ランキング
+  %li マスター部門サークル総合平均ランキング
+  %li 機種別部門個人ランキング
 
-#circles
-  %table.table.table-bordered.table-striped
-    %thead
-      %tr
-        %td 順位
-        %td サークル
-        %td 大学
-        %td 得点
-        %td 参加人数
-    %tbody
-      - last_score = 0
-      - last_rank = 1
-      - @circles.each_with_index do |master_circle, index|
-        - cache master_circle do
-          - unless last_score == master_circle.total_score
-            - last_score = master_circle.total_score
-            - last_rank = index + 1
-          %tr
-            %td= last_rank
-            %td= link_to master_circle.name, circle_path(master_circle.circle)
-            %td= master_circle.circle.university
-            %td= master_circle.total_score
-            %td= master_circle.circle.users.count
+%ul.nav.nav-tabs
+  %li.active
+    = link_to '総合ランキング', '#circles', :'data-toggle' => 'tab'
+  %li
+    = link_to 'マスター部門個人', '#master_individual', :'data-toggle' => 'tab'
+  %li
+    = link_to 'マスター部門機種別', '#master_games', :'data-toggle' => 'tab'
+  %li
+    = link_to 'マスター部門サークル総合', '#master_average', :'data-toggle' => 'tab'
+  %li
+    = link_to '機種別部門個人', '#games', :'data-toggle' => 'tab'
+
+.tab-content
+  #circles.tab-pane.active
+    Now Loading...
+
+  #master_individual.tab-pane
+    Now Loading...
+
+  #master_games.tab-pane
+    Now Loading...
+
+  #master_average.tab-pane
+    Now Loading...
+
+  #games.tab-pane
+    Now Loading...

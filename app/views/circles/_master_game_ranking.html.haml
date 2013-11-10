@@ -1,0 +1,10 @@
+%ul.nav.nav-pills
+  - Game.all.each_with_index do |game, index|
+    - cache game do
+      %li{ class: index == 0 ? 'active' : '' }
+        = link_to game.title, "#master_game#{game.id}", :'data-toggle' => 'tab'
+
+.tab-content
+  - Game.all.each_with_index do |game, index|
+    .tab-pane{ id: "master_game#{game.id}", class: index == 0 ? 'active' : '' }
+      = render 'circles/game_scores', game: game

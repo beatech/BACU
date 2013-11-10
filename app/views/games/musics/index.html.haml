@@ -3,17 +3,4 @@
 %h2
   機種別部門課題曲
 
-%table.table.table-bordered.table-striped
-  %thead
-    %tr
-      %td 機種
-      %td{ colspan: 2 } 課題曲1
-      %td{ colspan: 2 } 課題曲2
-      %td{ colspan: 2 } 課題曲3
-  %tbody
-    - Game.all.each do |game|
-      %tr
-        %td= game.title
-        - game.game_musics.each do |music|
-          %td= music.difficulty
-          %td= music.title
+= render 'games/musics/music_list'

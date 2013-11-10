@@ -1,0 +1,15 @@
+- cache game do
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %td 順位
+        %td サークル
+        %td 機種別平均スコア
+        %td サークル得点
+    %tbody
+      - game.master_circle_game_scores.order('average DESC').each_with_index do |circle_game_score, index|
+        %tr
+          %td= index + 1
+          %td= circle_game_score.master_circle.circle.name
+          %td= circle_game_score.average
+          %td= circle_game_score.point

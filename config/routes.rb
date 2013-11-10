@@ -5,6 +5,11 @@ Bacu::Application.routes.draw do
   resource :circle, only: [:edit, :update] do
     member do
       get :welcome
+      post :render_circle_point_ranking
+      post :render_master_individual_point_ranking
+      post :render_master_game_point_ranking
+      post :render_master_circle_point_ranking
+      post :render_game_point_ranking
     end
   end
 

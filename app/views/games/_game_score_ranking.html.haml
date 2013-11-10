@@ -1,18 +1,18 @@
-%table.table.table-bordered.table-striped
-  %thead
-    %tr
-      %td 順位
-      %td 名前
-      %td サークル
-      %td 合計スコア
-      - game.game_musics.each do |music|
-        - cache music do
+- cache game do
+  %table.table.table-bordered.table-striped
+    %thead
+      %tr
+        %td 順位
+        %td 名前
+        %td サークル
+        %td 得点
+        %td 合計
+        - game.game_musics.each do |music|
           %td= music.title
-  %tbody
-    - last_score = 0
-    - last_rank = 1
-    - game.game_totals.sort_by(&:total_score).reverse.each_with_index do |game_total, index|
-      - cache game_total do
+    %tbody
+      - last_score = 0
+      - last_rank = 1
+      - game.game_totals.sort_by(&:total_score).reverse.each_with_index do |game_total, index|
         - unless last_score == game_total.total_score
           - last_score = game_total.total_score
           - last_rank = index + 1
@@ -23,6 +23,7 @@
             %td= '無所属'
           - else
             %td= game_total.user.circle.name
+          %td= game_total.point ? game_total.point : 0
           %td= game_total.total_score
           - game.game_musics.each do |music|
             %td= Game::Score.where(game_music_id: music.id, game_total_id: game_total.id).first.score

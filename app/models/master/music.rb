@@ -1,8 +1,13 @@
 class Master::Music < ActiveRecord::Base
   MAX_INTEGER = 1000
 
-  belongs_to :game
-  has_many :master_scores, class_name: 'Master::Score'
+  belongs_to :game,
+    class_name: '::Game',
+    foreign_key: :game_id
+  has_many :master_scores,
+    class_name: 'Master::Score',
+    foreign_key: :master_music_id
+
   validates :title, presence: true
   validates :difficulty, presence: true
   validates :game_id, presence: true

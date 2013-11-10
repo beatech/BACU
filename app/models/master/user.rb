@@ -1,7 +1,17 @@
 class Master::User < ActiveRecord::Base
-  belongs_to :user, class_name: '::User'
-  has_one :circle, class_name: '::Circle', through: :user
-  has_many :master_scores, class_name: 'Master::Score'
+  belongs_to :user,
+    class_name: '::User',
+    foreign_key: :user_id
+  has_one :circle,
+    class_name: '::Circle',
+    through: :user
+  has_one :master_circle,
+    class_name: 'Master::Circle',
+    through: :circle
+  has_many :master_scores,
+    class_name: 'Master::Score',
+    foreign_key: :master_user_id
+
   validates :total_score, presence: true
   validates :user_id, presence: true
 
@@ -20,6 +30,17 @@ class Master::User < ActiveRecord::Base
         sum + master_score.score
       }
       user.save
+    end
+  end
+
+  def self.update_individual_point
+    Master::User.order('total_score desc').each_with_index do |master_user, index|
+      if 30 > index
+        master_user.individual_point = (50 * ((30 - index).to_f / 30)).to_i
+      else
+        master_user.individual_point = 0
+      end
+      master_user.save
     end
   end
 end

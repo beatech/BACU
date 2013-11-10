@@ -1,0 +1,22 @@
+%table.table.table-bordered.table-striped
+  %thead
+    %tr
+      %th 順位
+      %th サークル
+      %th 大学
+      %th 得点
+      %th 参加人数
+  %tbody
+    - last_score = 0
+    - last_rank = 1
+    - Circle.order('point DESC').each_with_index do |circle, index|
+      - cache circle do
+        - unless last_score == circle.point
+          - last_score = circle.point
+          - last_rank = index + 1
+        %tr
+          %td= last_rank
+          %td= link_to circle.name, circle_path(circle)
+          %td= circle.university
+          %td= circle.point ? circle.point : 0
+          %td= circle.users.count

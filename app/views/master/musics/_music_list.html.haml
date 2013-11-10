@@ -4,6 +4,7 @@
       %td 機種
       %td{ colspan: 2 } 課題曲その1（KAC関係なく簡単なもの）
       %td{ colspan: 3 } 課題曲その2（KACに被せる）
+      %td 備考
   %tbody
     - Game.all.each do |game|
       - cache game do
@@ -18,3 +19,15 @@
             %td= second_music.difficulty
             %td= second_music.title
             %td= second_music.insurance_score
+          %td
+            - case game.id
+            - when 1
+              アシスト、H-RAN使用不可
+            - when 5
+              CUTオプション使用不可
+            - when 6
+              CUT、ランダムオプション使用不可
+            - when 7
+              CUT、ミラーオプション使用不可
+            - when 9
+              難易度はマスター固定

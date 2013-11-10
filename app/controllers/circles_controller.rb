@@ -3,13 +3,6 @@ class CirclesController < ApplicationController
   before_filter :require_login, only: [:edit, :update]
 
   def index
-    @circles = Circle.all.map { |circle|
-      if circle.master_circle
-        circle.master_circle
-      else
-        Master::Circle.create(circle_id: circle.id, total_score: 0)
-      end
-    }.sort_by(&:total_score).reverse
   end
 
   def show
@@ -37,6 +30,12 @@ class CirclesController < ApplicationController
 
   def welcome
   end
+
+  def render_circle_point_ranking; respond_to { |format| format.js }; end
+  def render_master_individual_point_ranking; respond_to { |format| format.js }; end
+  def render_master_game_point_ranking; respond_to { |format| format.js }; end
+  def render_master_circle_point_ranking; respond_to { |format| format.js }; end
+  def render_game_point_ranking; respond_to { |format| format.js }; end
 
   private
   def create_params
