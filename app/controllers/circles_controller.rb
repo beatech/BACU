@@ -25,7 +25,7 @@ class CirclesController < ApplicationController
   def update
     @circle = @twitter_account.circle
     @circle.update_attributes(update_params)
-    redirect_to root_url
+    redirect_to circle_path(@circle)
   end
 
   def welcome
