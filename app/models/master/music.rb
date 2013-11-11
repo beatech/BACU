@@ -7,6 +7,9 @@ class Master::Music < ActiveRecord::Base
   has_many :master_scores,
     class_name: 'Master::Score',
     foreign_key: :master_music_id
+  has_many :tips,
+    class_name: '::Tip',
+    foreign_key: :master_music_id
 
   validates :title, presence: true
   validates :difficulty, presence: true

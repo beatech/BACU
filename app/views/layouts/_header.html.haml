@@ -12,8 +12,8 @@
             = link_to 'マスター部門', master_path
           %li{ class: current_page?(games_path) ? 'active' : '' }
             = link_to '機種別部門', games_path
-          %li{ class: current_page?(entries_path) ? 'active' : '' }
-            = link_to 'ページ一覧', entries_path
+          %li{ class: current_page?(tips_path) ? 'active' : '' }
+            = link_to '解禁方法', tips_path
         %ul.nav.pull-right
           - if @twitter_account
             %li.dropdown

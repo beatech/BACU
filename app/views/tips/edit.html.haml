@@ -1,0 +1,14 @@
+%p= link_to '解禁方法に戻る', tips_path
+
+- if @tip.master_music.present?
+  %h3 #{@tip.master_music.title}の解禁方法
+  = form_for @tip do |f|
+    = f.hidden_field :master_music_id
+    %p= f.text_area :content, class: 'span8', rows: 3
+    %p= f.submit '編集する', class: 'btn btn-primary'
+- elsif @tip.game_music.present?
+  %h3 #{@tip.game_music.title}の解禁方法
+  = form_for @tip do |f|
+    = f.hidden_field :game_music_id
+    %p= f.text_area :content, class: 'span8', rows: 3
+    %p= f.submit '編集する', class: 'btn btn-primary'

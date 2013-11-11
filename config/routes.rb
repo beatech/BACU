@@ -74,6 +74,8 @@ Bacu::Application.routes.draw do
     end
   end
 
+  resources :tips
+
   get '/auth/twitter/callback' => 'sessions#twitter_create'
   resource :session, only: [:destroy]
 

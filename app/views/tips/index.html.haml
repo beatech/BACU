@@ -1,0 +1,6 @@
+= link_to 'ホームに戻る', root_url
+%h2 解禁方法
+%p 機種を初めてプレーする人向けに、課題曲の解禁方法を書き込むページです。
+
+- Game.all.each do |game|
+  = render 'tips/game', game: game

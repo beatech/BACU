@@ -1,10 +1,10 @@
 %table.table.table-bordered.table-striped
   %thead
     %tr
-      %td 機種
-      %td{ colspan: 2 } 課題曲その1（KAC関係なく簡単なもの）
-      %td{ colspan: 3 } 課題曲その2（KACに被せる）
-      %td 備考
+      %th 機種
+      %th{ colspan: 2 } 課題曲その1（KAC関係なく簡単なもの）
+      %th{ colspan: 3 } 課題曲その2（KACに被せる）
+      %th 備考
   %tbody
     - Game.all.each do |game|
       - cache game do
