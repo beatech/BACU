@@ -1,5 +1,7 @@
 class TwitterAccount < ActiveRecord::Base
-  has_one :user
+  has_one :user,
+    class_name: 'User',
+    foreign_key: :twitter_account_id
   has_one :circle
 
   validates :uid, presence: true

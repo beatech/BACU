@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   belongs_to :twitter_account,
     class_name: 'TwitterAccount',
-    foreign_key: :user_id
+    foreign_key: :twitter_account_id
   belongs_to :circle,
     class_name: 'Circle',
     foreign_key: :circle_id
