@@ -10,14 +10,9 @@
             「#{master_music.title}」
   %tbody
     - cache game do
-      - last_score = 0
-      - last_rank = 1
-      - Master::User.order('total_score desc').each_with_index do |master_user, index|
-        - unless last_score == master_user.total_score
-          - last_score = master_user.total_score
-          - last_rank = index + 1
+      - Master::User.order('total_score desc').each_with_rank do |master_user, rank|
         %tr
-          %td= last_rank
+          %td= rank
           %td= master_user.name
 
           - first_music_id = game.master_musics.where(music_order: 1).pluck(:id)

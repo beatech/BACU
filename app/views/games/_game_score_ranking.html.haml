@@ -10,14 +10,9 @@
         - game.game_musics.each do |music|
           %td= music.title
     %tbody
-      - last_score = 0
-      - last_rank = 1
-      - game.game_totals.where('total_score > 0').sort_by(&:total_score).reverse.each_with_index do |game_total, index|
-        - unless last_score == game_total.total_score
-          - last_score = game_total.total_score
-          - last_rank = index + 1
+      - game.game_totals.where('total_score > 0').order('total_score DESC').each_with_rank do |game_total, rank|
         %tr
-          %td= last_rank
+          %td= rank
           %td= game_total.user.name
           - if game_total.user.circle_id == 0
             %td= '無所属'

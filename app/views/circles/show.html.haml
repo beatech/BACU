@@ -16,17 +16,11 @@
       %th Twitter
       %th マスター部門得点
   %tbody
-    - last_score = 0
-    - last_rank = 1
-    - @circle.master_users.order('total_score desc').each_with_index do |master_user, index|
+    - @circle.master_users.order('total_score desc').each_with_rank_by(:total_score) do |master_user, rank|
       - cache master_user do
-        - master_total_score = master_user.total_score
-        - unless last_score == master_total_score
-          - last_score = master_total_score
-          - last_rank = index + 1
         %tr
-          %td= last_rank
+          %td= rank
           %td= master_user.user.name
           - screen_name = master_user.user.twitter_account.screen_name
           %td= link_to "@#{screen_name}", "https://twitter.com/#{screen_name}"
-          %td= master_total_score
+          %td= master_user.total_score

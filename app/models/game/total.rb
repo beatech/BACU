@@ -34,8 +34,7 @@ class Game::Total < ActiveRecord::Base
       game_totals = Game::Total.where(game_id: game.id).where('total_score > 0').order('total_score DESC')
       user_count = game_totals.count
       sigma = self.sigma(user_count)
-      game_totals.each_with_index do |game_total, index|
-        rank = index + 1
+      game_totals.each_with_rank do |game_total, rank|
         game_total.point = ((150.0 / sigma) / (rank + POINT_PARAMETER)).to_i
         game_total.save
       end
