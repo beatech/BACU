@@ -31,7 +31,7 @@ GEM
     bootstrap-kaminari-views (0.0.2)
       kaminari (>= 0.13)
       rails (>= 3.1)
-    bootstrap-sass (3.0.0.0)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.1.4)
     capybara (2.1.0)
@@ -187,7 +187,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   bootstrap-kaminari-views
-  bootstrap-sass
+  bootstrap-sass (~> 2.3.2)
   capybara
   coffee-rails (~> 4.0.1)
   delayed_job_active_record
