@@ -3,7 +3,7 @@
 
 %h2
   機種別部門
-  - if @twitter_account
+  - if @twitter_account && Date.today < Date.new(2013, 12, 3)
     - if @twitter_account.user.present?
       = link_to 'スコアを編集する', edit_game_path, class: 'btn btn-primary'
     - elsif @twitter_account.circle.present?

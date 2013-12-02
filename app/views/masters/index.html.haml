@@ -3,7 +3,7 @@
 
 %h2
   マスター部門
-  - if @twitter_account
+  - if @twitter_account && Date.today < Date.new(2013, 12, 3)
     - if @twitter_account.user.present?
       - if @twitter_account.user.circle_id != 0
         = link_to 'スコアを編集する', edit_master_path, class: 'btn btn-primary'

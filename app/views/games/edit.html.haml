@@ -3,27 +3,28 @@
 %h3
   機種別部門 スコア編集
 
-= form_tag(game_path) do
-  = hidden_field_tag :user_id, @twitter_account.user.id
-  %table.table.table-bordered.table-striped
-    %thead
-      %tr
-        %td 機種
-        %td 曲名
-        %td スコア
-    %tbody
-      - Game.all.each do |game|
-        - game_total = Game::Total.where(game_id: game.id, user_id: @user.id).first
-        - game_total = Game::Total.create(game_id: game.id, user_id: @user.id, total_score: 0) if game_total.blank?
-        - game.game_musics.each_with_index do |music, index|
-          %tr
-            - if index == 0
-              %td{ rowspan: 3 }= game.title
-            %td
-              = music.title
-              = music.difficulty
-            %td
-              - score = Game::Score.where(game_total_id: game_total.id, game_music_id: music.id).first
-              - score = Game::Score.create(game_total_id: game_total.id, game_music_id: music.id, score: 0) if score.blank?
-              = number_field_tag "music[#{music.id}]", score.score, step: 0.01
-  = submit_tag 'スコアを更新する', class: 'btn btn-primary'
+- if Date.today < Date.new(2013, 12, 3)
+  = form_tag(game_path) do
+    = hidden_field_tag :user_id, @twitter_account.user.id
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %td 機種
+          %td 曲名
+          %td スコア
+      %tbody
+        - Game.all.each do |game|
+          - game_total = Game::Total.where(game_id: game.id, user_id: @user.id).first
+          - game_total = Game::Total.create(game_id: game.id, user_id: @user.id, total_score: 0) if game_total.blank?
+          - game.game_musics.each_with_index do |music, index|
+            %tr
+              - if index == 0
+                %td{ rowspan: 3 }= game.title
+              %td
+                = music.title
+                = music.difficulty
+              %td
+                - score = Game::Score.where(game_total_id: game_total.id, game_music_id: music.id).first
+                - score = Game::Score.create(game_total_id: game_total.id, game_music_id: music.id, score: 0) if score.blank?
+                = number_field_tag "music[#{music.id}]", score.score, step: 0.01
+    = submit_tag 'スコアを更新する', class: 'btn btn-primary'
