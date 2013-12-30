@@ -5,53 +5,55 @@
     %th.span4{ colspan: 2 } 課題曲
     %th.span2 投稿者
     %th 解禁方法
-    - if @twitter_account && @twitter_account.user.present?
+    - if login_as_user_account?
       %th.span1
   %tbody
     - game.master_musics.each do |master_music|
-      - rowspan = master_music.tips.present? ? master_music.tips.count : 1
-      - if master_music.tips.present?
-        - master_music.tips.each_with_index do |tip, index|
+      - tips = master_music.tips.to_a
+      - tips_count = tips.count
+      - if tips_count > 0
+        - tips.each_with_index do |tip, index|
           %tr
             - if index == 0
-              %td.span2{ rowspan: rowspan } マスター部門#{master_music.music_order}
-              %td.span2{ rowspan: rowspan } #{master_music.title} #{master_music.difficulty}
+              %td.span2{ rowspan: tips_count } マスター部門#{master_music.music_order}
+              %td.span2{ rowspan: tips_count } #{master_music.title} #{master_music.difficulty}
             %td= tip.user.name
             %td
               = tip.content
-              - if @twitter_account && @twitter_account.user == tip.user
+              - if login_user_id == tip.user
                 = link_to '編集', edit_tip_path(tip)
                 = link_to '削除', tip_path(tip), method: :delete
-            - if @twitter_account && @twitter_account.user.present? && index == 0
-              %td.span1{ rowspan: rowspan }= link_to '投稿', new_tip_path(master_music_id: master_music.id)
+            - if login_as_user_account? && index == 0
+              %td.span1{ rowspan: tips_count }= link_to '投稿', new_tip_path(master_music_id: master_music.id)
       - else
         %tr
           %td.span2 マスター部門#{master_music.music_order}
           %td.span2 #{master_music.title} #{master_music.difficulty}
           %td{ colspan: 2 } まだ投稿されていません
-          - if @twitter_account && @twitter_account.user.present?
+          - if login_as_user_account?
             %td.span1= link_to '投稿', new_tip_path(master_music_id: master_music.id)
 
     - game.game_musics.each_with_index do |game_music, music_index|
-      - rowspan = game_music.tips.present? ? game_music.tips.count : 1
-      - if game_music.tips.present?
-        - game_music.tips.each_with_index do |tip, index|
+      - tips = game_music.tips.to_a
+      - tips_count = tips.count
+      - if tips_count > 0
+        - tips.each_with_index do |tip, index|
           %tr
             - if index == 0
-              %td.span2{ rowspan: rowspan } 機種別部門#{music_index + 1}
-              %td.span2{ rowspan: rowspan } #{game_music.title} #{game_music.difficulty}
-            %td= tip.user.name
+              %td.span2{ rowspan: tips_count } 機種別部門#{music_index + 1}
+              %td.span2{ rowspan: tips_count } #{game_music.title} #{game_music.difficulty}
+            %td= User.where(id: tip.user_id).pluck(:name).first
             %td
               = tip.content
-              - if @twitter_account && @twitter_account.user == tip.user
+              - if login_user_id == tip.user_id
                 = link_to '編集', edit_tip_path(tip)
                 = link_to '削除', tip_path(tip), method: :delete
-            - if @twitter_account && @twitter_account.user.present? && index == 0
-              %td.span1{ rowspan: rowspan }= link_to '投稿', new_tip_path(game_music_id: game_music.id)
+            - if login_as_user_account? && index == 0
+              %td.span1{ rowspan: tips_count }= link_to '投稿', new_tip_path(game_music_id: game_music.id)
       - else
         %tr
           %td.span2 機種別部門#{music_index + 1}
           %td.span2 #{game_music.title} #{game_music.difficulty}
           %td{ colspan: 2 } まだ投稿されていません
-          - if @twitter_account && @twitter_account.user.present?
+          - if login_as_user_account?
             %td.span1= link_to '投稿', new_tip_path(game_music_id: game_music.id)
