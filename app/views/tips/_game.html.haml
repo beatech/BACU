@@ -8,7 +8,7 @@
     - if @twitter_account && @twitter_account.user.present?
       %th.span1
   %tbody
-    - game.master_musics.order('music_order ASC').each do |master_music|
+    - game.master_musics.each do |master_music|
       - rowspan = master_music.tips.present? ? master_music.tips.count : 1
       - if master_music.tips.present?
         - master_music.tips.each_with_index do |tip, index|
