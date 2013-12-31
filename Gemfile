@@ -37,3 +37,4 @@ gem 'delayed_job_active_record'
 
 gem 'each_with_rank'
 gem 'google-analytics-rails'
+gem 'growthforecast'
