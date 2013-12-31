@@ -58,8 +58,6 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     google-analytics-rails (0.0.4)
-    growthforecast (0.0.4)
-      resolve-hostname
     haml (4.0.3)
       tilt
     haml-rails (0.4)
@@ -127,7 +125,6 @@ GEM
     rake (10.1.0)
     redcarpet (3.0.0)
     ref (1.0.5)
-    resolve-hostname (0.0.4)
     rspec-core (2.14.7)
     rspec-expectations (2.14.3)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -213,7 +210,6 @@ DEPENDENCIES
   delayed_job_active_record
   each_with_rank
   google-analytics-rails
-  growthforecast
   haml-rails
   jbuilder (~> 1.2)
   jquery-rails
