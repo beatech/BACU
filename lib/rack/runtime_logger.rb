@@ -9,8 +9,8 @@ class Rack::RuntimeLogger
 
     if headers.has_key?('X-Runtime') && request.path_info !~ /\.[^.]+$/
       growth_forecast = GrowthForecast.new('localhost', 5125)
-      runtime = headers['X-Runtime']
-      growth_forecast.post('bacu', 'response', request.path_info, runtime)
+      runtime = (headers['X-Runtime'].to_f * 1000).to_i
+      growth_forecast.post('bacu', 'response_time', 'all', runtime)
     end
 
     [status, headers, body]
