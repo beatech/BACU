@@ -108,7 +108,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.1)
       rack
-    rack-runtime_growth_forecast (0.0.1)
+    rack-runtime_growth_forecast (0.0.2)
       growthforecast (~> 0.0.4)
       rack
     rack-test (0.6.2)
@@ -224,7 +224,7 @@ DEPENDENCIES
   mysql2
   omniauth
   omniauth-twitter
-  rack-runtime_growth_forecast
+  rack-runtime_growth_forecast (~> 0.0.2)
   rails (= 4.0.1)
   redcarpet
   rspec-rails
